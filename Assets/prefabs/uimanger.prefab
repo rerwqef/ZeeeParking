@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4420999239223496106}
   - component: {fileID: 2247905069184847987}
-  - component: {fileID: 5222080689881601792}
+  - component: {fileID: 6235603537252291365}
   m_Layer: 0
   m_Name: uimanger
   m_TagString: uimg
@@ -51,7 +51,14 @@ MonoBehaviour:
   progress_pannel: {fileID: 0}
   progressSlider: {fileID: 0}
   level_pannel: {fileID: 0}
---- !u!114 &5222080689881601792
+  losepannel: {fileID: 0}
+  levelpannel: {fileID: 0}
+  userNameEnteringPannel: {fileID: 0}
+  cam: {fileID: 0}
+  cart: {fileID: 0}
+  VictoryPannel: {fileID: 0}
+  transition: {fileID: 0}
+--- !u!114 &6235603537252291365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,12 +67,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9125112177834798691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c49b6425847c1489ab926380f5a7c6, type: 3}
+  m_Script: {fileID: 11500000, guid: e640bb6f43512274e8923113a2f1bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  maxSpeed: 260
-  minSpeedArrowAngle: 39.5
-  maxSpeedArrowAngle: -204.7
-  speedLabel: {fileID: 0}
-  arrow: {fileID: 0}
+  time: {fileID: 0}
+  speedometer: {fileID: 0}
+  star: 1
+  starT:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -12,6 +12,7 @@ public class vr_cam_control : MonoBehaviour,IDragHandler,IPointerDownHandler,IPo
    // [SerializeField] CinemachineVirtualCamera vcam;
     string strmouseX = "Mouse X", strMouseY = "Mouse Y";
     // Start is called before the first frame update
+    public bool iSrOTATABLE=false;
     void Start()
     {
        camcontrolarea = GetComponent<Image>();  
@@ -19,6 +20,7 @@ public class vr_cam_control : MonoBehaviour,IDragHandler,IPointerDownHandler,IPo
 
     public void OnDrag(PointerEventData eventData)
     {
+        if(!iSrOTATABLE)return;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             camcontrolarea.rectTransform,
             eventData.position,
@@ -33,10 +35,12 @@ public class vr_cam_control : MonoBehaviour,IDragHandler,IPointerDownHandler,IPo
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(!iSrOTATABLE)return;
         OnDrag(eventData);
     }
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!iSrOTATABLE) return;
         vcam.m_XAxis.m_InputAxisName = null;
         vcam.m_YAxis.m_InputAxisName = null;
         vcam.m_XAxis.m_InputAxisValue = 0;

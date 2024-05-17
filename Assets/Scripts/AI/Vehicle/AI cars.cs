@@ -27,6 +27,7 @@ public class AIcars : MonoBehaviour
     private List<Transform> nodes;
     private int currentNode=0;
     public  bool avoiding = false;
+    bool onGmaefished;
    // public bool m;
     void Start()
     {
@@ -48,14 +49,20 @@ public class AIcars : MonoBehaviour
         
         
     }
-
+    public void ongamefished()
+    {
+        onGmaefished = true;
+    }
     void FixedUpdate()
     {
-        sensors();
-        ApplySteering();
-        Drive();
-        CheckWaypointDistance();
-        Braking();
+        if (!onGmaefished)
+        {
+            sensors();
+            ApplySteering();
+            Drive();
+            CheckWaypointDistance();
+            Braking();
+        }
     }
 
     void ApplySteering()

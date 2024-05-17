@@ -11,6 +11,9 @@ TagManager:
   - uimg
   - Breck
   - goal
+  - OBC
+  - VictoryPanel
+  - LosePannel
   layers:
   - Default
   - TransparentFX
@@ -21,8 +24,8 @@ TagManager:
   - 
   - Road
   - 
-  - 
-  - 
+  - pLAYER
+  - CAMlAYER
   - 
   - 
   - 

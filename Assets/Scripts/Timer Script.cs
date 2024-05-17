@@ -7,32 +7,38 @@ using UnityEngine.UI;
 public class TimerScript : MonoBehaviour
 {
     public float time;
-    public TextMeshProUGUI timertext;
-    public Image fill;
+    public Text timertext;
     public float max;
-    GameManager gm;
+    GameOver gameOver;
     void Start()
     {
-
         time = max;
-      gm=GameManager.Instance;
+        gameOver = GameObject.FindAnyObjectByType<GameOver>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        time-=Time.deltaTime; 
-        timertext.text=""+(int)time;
-        fill.fillAmount = time / max;
+        // Decrease time by deltaTime
+        time -= Time.deltaTime;
+
+        // Ensure time doesn't go below 0
+        time = Mathf.Max(time, 0f);
+
+        // Calculate minutes and seconds
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+
+        // Update the UI text to display minutes and seconds
+        timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        // Check if time is up
         if (time <= 0)
         {
-            time = 0;
-            while (true)
-            {
-                gm.failedingame();
-                break;
-            }
-          
+            // Perform actions when time is up
+            Debug.Log("Time's up!");
+            
+            gameOver.gameover();
+            // Add your code here for when the time is up
         }
     }
 }

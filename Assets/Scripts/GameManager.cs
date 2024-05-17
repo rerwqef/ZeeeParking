@@ -2,12 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 
 public class GameManager : MonoBehaviour
 {
     // Singleton instance
     private static GameManager _instance;
+    public static  Action onGameStarted;
+    public static  Action onGameFinished;
+    public static  Action onGamePaused;
+    public static  Action onGaMeOver;
+   
+    public static  Action LoadNewLevel;
+
     public static GameManager Instance
     {
         get
@@ -27,10 +35,12 @@ public class GameManager : MonoBehaviour
     public int carindex;
     public int fuel;
     public int coin;
-    public int Buiedcars_num = 2;
-
+    public int Buiedcars_num = 6;
+    public String UserName=null;
     // Game objects and UI
- 
+/*    public string vr_enable="false";
+    public int currentsterinngvalue=0;*/
+
     private UiManger uiManger;
  
   
@@ -46,13 +56,14 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+        
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-
+        Buiedcars_num = 6;
         // Load player data
         loadallldata();
     }
@@ -65,7 +76,8 @@ public class GameManager : MonoBehaviour
     {
         // Log application data path
         uiManger = GameObject.FindGameObjectWithTag("uimg").GetComponent<UiManger>();
-
+        onGamePaused += Pause;
+        
     }
     // Update is called once per frame
     void Update()
@@ -79,8 +91,21 @@ public class GameManager : MonoBehaviour
         carindex = PlayerPrefs.GetInt("carindex");
         coin = PlayerPrefs.GetInt("coin");
         level = PlayerPrefs.GetInt("level_index");
-    }
+   /*     if (vr_enable != null)
+        {
+            vr_enable = PlayerPrefs.GetString("vr_enable");
+        }
+        if (currentsterinngvalue != 0)
+        {
+            currentsterinngvalue = PlayerPrefs.GetInt("currentsterinngvalue");
+        }*/
 
+    }
+ /*   public void setcall(string m,int n)
+    {
+        PlayerPrefs.SetString("vr_enable",m);
+       PlayerPrefs.SetInt("currentsterinngvalue", n);
+    }*/
     // Save car index data to PlayerPrefs
     public void car_datasaving()
     {
@@ -185,10 +210,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = Time.timeScale == 0f ? 1f : 0f;
         pause = !pause;
 
-     if (uiManger.Pause_pannel != null)
-       {
-         uiManger.Pause_pannel.SetActive(pause);
+         
+        if(uiManger == null)
+        {
+            uiManger = GameObject.FindGameObjectWithTag("uimg").GetComponent<UiManger>();
+            Debug.Log("founded");
         }
+        uiManger.Pause_pannel.SetActive(pause);
+
     }
 
     // Open settings logic
@@ -212,14 +241,14 @@ public class GameManager : MonoBehaviour
             Pause();
             i++;
         }
-       uiManger.wimningpannel.SetActive(true);
+    //   uiManger.wimningpannel.SetActive(true);
     }
 
     // Activate failed panel
     public void failedingame()
     {
         Pause();
-        uiManger.losepannel.SetActive(true);
+     //   uiManger.losepannel.SetActive(true);
     }
   
 }
